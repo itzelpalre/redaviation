@@ -53,6 +53,8 @@ RAPS
             <td>{{$contact->perfil}}</td>
             <td>
                 <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Editar</a>
+                <a href="{{ route('contacts.create')}}" class="btn btn-primary">crear</a>
+                <a href="{{ route('administrador.create')}}"><button type="button" class="btn btn-primary">Agregar Usuarios</button></a>
             </td>
             <td>
                 <form action="{{ route('contacts.destroy', $contact->id)}}" method="post">

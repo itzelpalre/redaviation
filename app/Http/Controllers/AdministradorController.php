@@ -15,6 +15,7 @@ class AdministradorController extends Controller
   public function index()
   {
      $contacts = Administrador::all();
+  //   $adminis = Administrador::all();
 
      return view('administrador.index', compact('contacts'));
 
@@ -27,7 +28,9 @@ class AdministradorController extends Controller
    */
   public function create()
   {
-      return view('contacts.create');
+     // return view('contacts.create');
+     //return view('administrador.crear');
+     return 'crear131';
   }
 
   /**
