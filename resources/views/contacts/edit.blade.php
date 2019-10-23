@@ -2,7 +2,7 @@
 @section('main')
 <div class="row">
     <div class="col-sm-8 offset-sm-2">
-        <h1 class="display-3">Update a contact</h1>
+        <h1 class="display-3">Update</h1>
 
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -14,7 +14,7 @@
         </div>
         <br />
         @endif
-      <!--  <form method="post" action="{{ route('contacts.update', $contact->id) }}">
+        <form method="post" action="{{ route('contacts.update', $contact->id) }}">
             @method('PATCH')
             @csrf
             <div class="form-group">
@@ -45,7 +45,7 @@
                 <input type="text" class="form-control" name="job_title" value={{ $contact->job_title }} />
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
-        </form>-->
+        </form>
     </div>
 </div>
 @endsection
