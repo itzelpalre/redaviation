@@ -3,7 +3,7 @@
 @section('main')
 <div class="row">
 <div class="col-sm-12">
-    <h1 class="display-3">Contacts</h1>    
+    <h1 class="display-3">Contacts</h1>
   <table class="table table-striped">
     <thead>
         <tr>
@@ -33,6 +33,8 @@
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>
+                  <a href="{{ route('contacts.create')}}" class="btn btn-primary">Crear usuarios</a>
+
                 </form>
             </td>
         </tr>

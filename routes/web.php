@@ -11,18 +11,58 @@
 |
 */
 
-Route::get('/', function (){
-  return view('login.accesos');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/dashboard-admin', function (){
+  return 'administrador';
+  //  return view('views.vista_para_admin');
+})->name('admin.dashboard'); // <--- este es el nombre que busca el controlador.
+
+Route::get('/dashboard', function (){
+  return 'no administrador';
+    //return view('views.vista_para_user');
+})->name('regular.dashboard'); // <--- este es el nombre que busca el controlador.
+
+Route::get('/', function () {
+    return view('welcome');
 });
+
+Route::resource('registroclientes', 'PermisosRol');
+
+Route::get('usuariologueado', function () {
+    return view('administrador.pruebas');
+});
+
+/*Route::get('/', function (){
+  return view('login.accesos');
+});*/
+
+Route::get('profile', function () {
+    // Only authenticated users may enter...
+})->middleware('auth.basic');
 
 Route::resource('contacts', 'ContactController');
 
 /* Rutas Usuario Administrador */
 Route::resource('administrador', 'AdministradorController');
 
+/* Rutas OT's */
+Route::resource('otingenieria', 'OtIngenieriaController');
+Route::resource('otresultados', 'OtResultadosController');
+Route::post('otstatus', 'OtResultadosController@myFormFunction');
 
+/* Rutas Demo */
+Route::get('demo', 'demoController@obtenerDatos');
 
+/* Roles de Usuario */
+Route::get('notes', 'NotesController@index');
+Route::get('notes/{id}/destroy', 'NotesController@destroy')->name('notes.destroy');
 
+/* Rutas Usuario Ingenieria */
+//Route::resource('ingenieria', 'IngenieriaController');
 
 //Route::get('usuario/{id}', 'UsuarioController@show');
 
