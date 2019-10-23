@@ -23,6 +23,8 @@ class CreateAdministradorsTable extends Migration
           $table->string('perfil');
           $table->boolean('activo');
           $table->string('owner');
+          $table->date('fechaAlta')->nullable();
+          $table->date('fechaBaja')->nullable();
           $table->timestamps();
         });
     }

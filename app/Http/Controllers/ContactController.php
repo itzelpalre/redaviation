@@ -27,8 +27,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-       // return view('contacts.create');
-       return 'red';
+        return view('contacts.create');
+
     }
 
     /**
@@ -117,7 +117,10 @@ class ContactController extends Controller
     {
         $contact = Contact::find($id);
         $contact->delete();
+        return 'se eliminó';
 
-        return redirect('/contacts')->with('success', 'Contact deleted!');
+        //return redirect('/contacts')->with('success', 'Contact deleted!');
+
+
     }
 }

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Administrador;
+use Carbon\Carbon;
+use Spatie\Permission\Traits\HasRoles;
 
 class AdministradorController extends Controller
 {
+  use HasRoles;
   /**
    * Display a listing of the resource.
    *
@@ -15,9 +18,10 @@ class AdministradorController extends Controller
   public function index()
   {
      $contacts = Administrador::all();
-  //   $adminis = Administrador::all();
+     $date = Carbon::now();
+     $resultado = $date->subDays(1);
 
-     return view('administrador.index', compact('contacts'));
+     return view('administrador.index', compact('contacts', 'resultado'));
 
   }
 
@@ -28,9 +32,7 @@ class AdministradorController extends Controller
    */
   public function create()
   {
-     // return view('contacts.create');
-     //return view('administrador.crear');
-     return 'crear131';
+      return view('administrador.create');
   }
 
   /**
@@ -41,22 +43,60 @@ class AdministradorController extends Controller
    */
   public function store(Request $request)
   {
-      $request->validate([
-          'first_name'=>'required',
-          'last_name'=>'required',
-          'email'=>'required'
-      ]);
 
-      $contact = new Contact([
-          'first_name' => $request->get('first_name'),
-          'last_name' => $request->get('last_name'),
-          'email' => $request->get('email'),
-          'job_title' => $request->get('job_title'),
-          'city' => $request->get('city'),
-          'country' => $request->get('country')
-      ]);
-      $contact->save();
-      return redirect('/contacts')->with('success', 'Contact saved!');
+    $contact = new Administrador([
+        'nombre' => $request->get('nombre'),
+        'correo' => $request->get('correo'),
+        'telefono' => $request->get('telefono'),
+        'usuario' => $request->get('usuario'),
+        'contraseña' => $request->get('contraseña'),
+        'perfil' => $request->get('perfil'),
+        'activo' => $request->get('estatus'),
+        'owner' => $request->get('owner'),
+        'fechaAlta' => $request->get('fechaAlta'),
+        'fechaBaja' => $request->get('fechaBaja'),
+    ]);
+  //  $contact->assignRole('ingenieria');
+    $contact->save();
+    $perfil = $contact->perfil;
+    $administrador = 'administrador';
+    $ingenieria = 'ingenieria';
+    $supervisor = 'supervisor';
+    $tecnico = 'tecnico';
+
+    if (($perfil == 'administrador'))
+        {
+          //  $contact->assignRole('administrador');
+        }
+        elseif (($perfil == 'ingenieria'))
+        {
+          /*  $user1 = Administrador::all();
+            $user1->assignRole('admin');*/
+        }
+        elseif (($perfil == 'supervisor'))
+        {
+          //  $contact->assignRole('supervisor');
+        }
+        elseif (($perfil == 'tecnico'))
+        {
+          //  $contact->assignRole('tecnico');
+        }
+        elseif (($perfil == 'almacen'))
+        {
+          //  $contact->assignRole('almacen');
+        }
+        elseif (($perfil == 'compras'))
+        {
+          //  $contact->assignRole('compras');
+        }
+        elseif (($perfil == 'gesa'))
+        {
+          //  $contact->assignRole('gesa');
+        }
+
+
+
+    return redirect('/administrador')->with('Bien', 'Se ha guardado la OT');
   }
 
   /**
@@ -67,7 +107,7 @@ class AdministradorController extends Controller
    */
   public function show($id)
   {
-      //
+      return 'vista ingeniería';
   }
 
   /**
@@ -80,6 +120,7 @@ class AdministradorController extends Controller
   {
       $contact = Contact::find($id);
       return view('contacts.edit', compact('contact'));
+
   }
 
   /**
@@ -117,10 +158,11 @@ class AdministradorController extends Controller
    */
   public function destroy($id)
   {
-      $contact = Contact::find($id);
+      $contact = Administrador::find($id);
       $contact->delete();
+      return 'borrado';
+      //return redirect('/contacts')->with('success', 'Contact deleted!');
 
-      return redirect('/contacts')->with('success', 'Contact deleted!');
   }
 
 

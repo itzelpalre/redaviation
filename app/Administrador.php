@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Administrador extends Model
 {
+  use HasRoles;
+  
   protected $fillable = [
       'nombre',
       'correo',
@@ -14,6 +17,8 @@ class Administrador extends Model
       'contraseña',
       'perfil',
       'activo',
-      'owner'
+      'owner',
+      'fechaAlta',
+      'fechaBaja'
   ];
 }

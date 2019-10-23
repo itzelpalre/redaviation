@@ -10,7 +10,10 @@ RAPS
   <table class="table table-striped">
     <tbody>
         <tr>
-          <td>Agregar Usuario</button></td>
+          <td><a href="{{ route('administrador.create')}}"><button type="button" class="btn btn-primary btn-lg">Agregar Usuario</button></a></td>
+        </tr>
+        <tr>
+          <td><a href="{{ route('registroclientes.index')}}"><button type="button" class="btn btn-primary btn-lg">Usuario</button></a></td>
         </tr>
     </tbody>
   </table>
@@ -52,12 +55,10 @@ RAPS
             <td>{{$contact->telefono}}</td>
             <td>{{$contact->perfil}}</td>
             <td>
-                <a href="{{ route('contacts.edit',$contact->id)}}" class="btn btn-primary">Editar</a>
-                <a href="{{ route('contacts.create')}}" class="btn btn-primary">crear</a>
-                <a href="{{ route('administrador.create')}}"><button type="button" class="btn btn-primary">Agregar Usuarios</button></a>
+                <a href="{{ route('administrador.edit',$contact->id)}}" class="btn btn-primary">Editar</a>
             </td>
             <td>
-                <form action="{{ route('contacts.destroy', $contact->id)}}" method="post">
+                <form action="{{ route('administrador.destroy', $contact->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Dar de baja</button>
